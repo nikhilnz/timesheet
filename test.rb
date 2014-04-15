@@ -1,5 +1,6 @@
 require 'json'
 require 'sinatra'
+require 'sinatra/reloader'
 require 'slim'
 
 set :views, '.'
@@ -9,6 +10,7 @@ get '/name' do
 end
 
 post '/name' do
-  ""
+        #Time.now
+  "nikhil"
 end
 
