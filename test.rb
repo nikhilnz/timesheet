@@ -9,8 +9,9 @@ get '/name' do
   slim :'main'
 end
 
-post '/name' do
-        #Time.now
-  "nikhil"
+post '/timesheet/submit' do
+  month = Date::MONTHNAMES[Time.now.mon]
+  year = Time.now.year
+  "The month is #{month} and the year is #{year}"
 end
 
