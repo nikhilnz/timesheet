@@ -1,19 +1,21 @@
-require 'date'
-month = Time.now.mon
-month_str = Date::MONTHNAMES[month]
-year = Time.now.year
+require 'json'
+require 'sinatra'
+require 'sinatra/reloader'
+require 'mongo'
+require_relative 'holiday'
 
-first_day_of_month = Date.new(year, month, 1)
-last_day_of_month = Date.new(year, month+1, 1) - 1
-
-puts "The month is #{month_str} and the year is #{year}"
-puts "There are #{(last_day_of_month).day} days in this month"
-
-count = 0
-(first_day_of_month.day.to_i .. last_day_of_month.day.to_i).each do |day|
-  count +=  1 if Date.new(year, month, day).saturday? || Date.new(year, month, day).sunday?
+configure do
+  MongoMapper.setup({'production' => {'uri' => 'mongodb:/pub_hols'}}, 'production')
 end
 
-puts "#{count} weekends"
+get '/holidays/public' do
+  total_days = 0
+  records = Holiday.where(:date => {:$gte => Time.parse('2014-05-1')}).where(:date => {:$lte => Time.parse('2014-05-31')})
+  records.each { |r| total_days = total_days + r.no_of_days.to_i }
+  "#{total_days}"
+end
 
-HttpParty.get('www.google.co.uk')
+get '/holidays/personal' do
+  "5"
+end
+

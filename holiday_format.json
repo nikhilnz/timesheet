@@ -1,0 +1,52 @@
+{
+    "holidays": [
+        {
+            "name": "New Years Day",
+            "date": "2014-01-01",
+            "no_of_days": 1,
+            "day": "Wednesday"
+        },
+        {
+            "name": "Good Friday",
+            "date": "2014-04-18",
+            "no_of_days": 1,
+            "day": "Friday"
+        },
+        {
+            "name": "Easter Monday",
+            "date": "2014-04-21",
+            "no_of_days": 1,
+            "day": "Monday"
+        },
+        {
+            "name": "Early May bank holiday",
+            "date": "2014-05-05",
+            "no_of_days": 1,
+            "day": "Monday"
+        },
+        {
+            "name": "Spring bank holiday",
+            "date": "2014-05-26",
+            "no_of_days": 1,
+            "day": "Monday"
+        },
+        {
+            "name": "Summer bank holiday",
+            "date": "2014-08-25",
+            "no_of_days": 1,
+            "day": "Monday"
+        },
+        {
+            "name": "Christmas Day",
+            "date": "2014-12-25",
+            "no_of_days": 1,
+            "day": "Thursday"
+        },
+        {
+            "name": "Boxing Day",
+            "date": "2014-12-26",
+            "no_of_days": 1,
+            "day": "Friday"
+        }
+    ]
+}
