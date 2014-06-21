@@ -20,8 +20,9 @@ post '/timesheet/submit' do
   pub_hols = HTTParty.get('http://localhost:4567/holidays/public').to_i
   hols_taken = HTTParty.get('http://localhost:4567/holidays/personal').to_i
 
-  total_days = CalendarHelper.total_days month, year
-  weekends = CalendarHelper.weekends month, year
+  date_wrapper = CalendarHelper::DateWrapper.new(month, year)
+  total_days = date_wrapper.total_days
+  weekends = date_wrapper.weekends
 
   working_days = total_days - weekends - pub_hols - hols_taken
   "The month is #{month} and the year is #{year}. \n
