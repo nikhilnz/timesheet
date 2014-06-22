@@ -17,10 +17,14 @@ post '/timesheet/submit' do
   month = Date::MONTHNAMES[Time.now.mon]
   year = Time.now.year
 
-  pub_hols = HTTParty.get('http://localhost:4567/holidays/public').to_i
+  date_wrapper = CalendarHelper::DateWrapper.new(month, year)
+
+  from = "#{year}-#{Time.now.mon}-#{date_wrapper.first_day_of_month}"
+  to = "#{year}-#{Time.now.mon}-#{date_wrapper.last_day_of_month}"
+
+  pub_hols = HTTParty.get('http://localhost:4567/holidays/public', :query => { :from => from, :to => to}).to_i
   hols_taken = HTTParty.get('http://localhost:4567/holidays/personal').to_i
 
-  date_wrapper = CalendarHelper::DateWrapper.new(month, year)
   total_days = date_wrapper.total_days
   weekends = date_wrapper.weekends
 
@@ -34,7 +38,4 @@ Total number of working days: #{working_days}"
 end
 
 
-get '/holidays' do
-  {key: 'value'}.to_json
-end
 
