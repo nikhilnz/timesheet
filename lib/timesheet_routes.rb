@@ -6,7 +6,6 @@ require 'httparty'
 require 'calendar_helper'
 
 
-set :views, '.'
 get '/name' do
   {key: 'value'}.to_json
   slim :'main'

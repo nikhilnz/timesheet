@@ -2,7 +2,7 @@ require 'json'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'mongo'
-require_relative 'holiday'
+require_relative '../db/holiday'
 
 configure do
   MongoMapper.setup({'production' => {'uri' => 'mongodb:/pub_hols'}}, 'production')
