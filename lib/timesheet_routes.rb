@@ -44,7 +44,7 @@ def generate_timesheet(month, year)
   working_days = total_days - weekends - pub_hols - hols_taken
   "The month is #{month.capitalize} and the year is #{year}. \n
 Total number of days: #{total_days}. \n
-The number of public holidays are #{pub_hols}. \n
+The number of public holidays are <a href='http://localhost:4567/holidays/public/view?from=#{from}&to=#{to}'>#{pub_hols}</a>. \n
 The number of weekends are #{weekends}. \n
 Number of holidays taken: #{hols_taken} \n
 Total number of working days: #{working_days}"
