@@ -1,3 +1,4 @@
+require 'slim'
 require 'json'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -9,18 +10,22 @@ configure do
 end
 
 get '/holidays/public/view' do
-
+  slim :'public_holidays', :locals => {records: records}
 end
 
 get '/holidays/public' do
+  total_days = records.inject(0) { |result, record| result + record.no_of_days.to_i }
+  "#{total_days}"
+end
+
+def records
   from = Time.parse(params[:from])
   to = Time.parse(params[:to])
   puts from
   puts to
-  records = Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
-  total_days = records.inject(0) {|result, record| result + record.no_of_days.to_i}
-  "#{total_days}"
+  Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
 end
+
 
 get '/holidays/personal' do
   "7"
