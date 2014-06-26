@@ -1,3 +1,9 @@
-- records.each do |record|
-  = record.name
-  = record.date
+html
+  body
+    table
+      - records.each do |record|
+        tr
+          td
+            = record.name
+          td
+            = record.date
