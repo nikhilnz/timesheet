@@ -10,3 +10,8 @@ gem 'mongo'
 gem 'mongo_mapper'
 gem 'bson_ext'
 gem 'calendar_helper'
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+end
