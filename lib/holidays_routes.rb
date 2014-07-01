@@ -1,3 +1,4 @@
+require 'slim'
 require 'json'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -8,16 +9,23 @@ configure do
   MongoMapper.setup({'production' => {'uri' => 'mongodb:/pub_hols'}}, 'production')
 end
 
+get '/holidays/public/view' do
+  slim :'public_holidays', :locals => {records: records}
+end
+
 get '/holidays/public' do
+  total_days = records.inject(0) { |result, record| result + record.no_of_days.to_i }
+  "#{total_days}"
+end
+
+def records
   from = Time.parse(params[:from])
   to = Time.parse(params[:to])
   puts from
   puts to
-  total_days = 0
-  records = Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
-  records.each { |r| total_days = total_days + r.no_of_days.to_i }
-  "#{total_days}"
+  Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
 end
+
 
 get '/holidays/personal' do
   "7"
