@@ -22,6 +22,9 @@ get '/timesheet/generate' do
   slim :'timesheet'
 end
 
+get '/holidays/add' do
+  slim :'add_holidays'
+end
 
 post '/timesheet/submit' do
 
