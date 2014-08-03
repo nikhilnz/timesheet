@@ -74,6 +74,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
+  bundler
   calendar_helper
   enrico
   httparty
