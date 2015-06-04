@@ -3,7 +3,10 @@ require 'json'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'mongo'
+require 'calendar_helper'
+
 require_relative '../db/holiday'
+require_relative '../db/personal_holiday'
 
 configure do
   MongoMapper.setup({'production' => {'uri' => 'mongodb:/pub_hols'}}, 'production')
@@ -19,15 +22,27 @@ get '/holidays/public' do
 end
 
 def records
-  from = Time.parse(params[:from])
-  to = Time.parse(params[:to])
-  puts from
-  puts to
+  date_wrapper = CalendarHelper::DateWrapper.new(params[:month], params[:year])
+  from = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-1")
+  to = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-#{date_wrapper.total_days}")
   Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
 end
 
-
-get '/holidays/personal' do
-  "7"
+get '/holidays/add' do
+  slim :'add_holidays'
 end
 
+post '/holidays/personal' do
+  from = "#{params[:from_day]}/#{params[:from_month]}/#{params[:from_year]}"
+  to = "#{params[:to_day]}/#{params[:to_month]}/#{params[:to_year]}"
+  person_holiday = PersonalHoliday.new(:from => from, :to => to, :type => 'vacation')
+  person_holiday.save!
+end
+
+get '/holidays/personal' do
+  date_wrapper = CalendarHelper::DateWrapper.new(params[:month], params[:year])
+  from = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-1")
+  to = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-#{date_wrapper.total_days}")
+  personal_holiday = PersonalHoliday.where(:from => {:$gte => from}).where(:to => {:$lte => to}).first
+  {from: personal_holiday.from, to: personal_holiday.to, type: personal_holiday.type, duration: 5}.to_json
+end
