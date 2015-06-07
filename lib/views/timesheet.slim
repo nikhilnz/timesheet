@@ -1,12 +1,12 @@
 = "The month is #{@month.capitalize} and the year is #{@year}. "
 br
-= "Total number of days: #{@total_days}."
+= "Total number of days: #{timesheet.total_days}."
+/br
+/= "The number of public holidays are"
+/a href='http://localhost:4567/holidays/public/view?from=#{@from}&to=#{@to}' #{@pub_hols}.
 br
-= "The number of public holidays are"
-a href='http://localhost:4567/holidays/public/view?from=#{@from}&to=#{@to}' #{@pub_hols}.
+= "The number of weekends are #{timesheet.weekends}."
+/br
+/= "Number of holidays taken: #{@hols_taken}"
 br
-= "The number of weekends are #{@weekends}."
-br
-= "Number of holidays taken: #{@hols_taken}"
-br
-= "Total number of working days: #{@working_days}"
+= "Total number of working days: #{timesheet.working_days}"
