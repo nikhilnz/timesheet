@@ -3,7 +3,11 @@ head
 
 h1 What would you like to do today?
 
-form name="input" action="/timesheet/dates" method="get"
+form name="generate-timesheet" action="/timesheet/dates" method="get"
   button
     | Generate Timesheet
+
+form name="add-holidays" action="/holidays/add" method="get"
+  button
+    | Add Holidays
 

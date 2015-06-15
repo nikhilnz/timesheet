@@ -9,9 +9,17 @@ gem 'enrico'
 gem 'mongo'
 gem 'mongo_mapper'
 gem 'bson_ext'
-gem 'calendar_helper'
+gem 'calendar_helper', path: '../calendar_helper'
+gem 'bundler'
+gem 'rake'
 
 group :test do
+  gem 'webmock'
   gem 'rspec'
   gem 'rack-test'
+  gem 'gherkin'
+  gem 'cucumber'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end

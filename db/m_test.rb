@@ -18,12 +18,13 @@ puts "*************************"
 
 
 db2 = mongo_client.db("pub_hols")
-coll = db2.collection("testData")
+coll = db2.collection("personal_holidays")
 coll.find.each { |row| puts row.inspect }
+coll.remove
 # puts 'dddd'
 # date_new = Time.parse("2014-12-24")
 # puts coll.find("date" => {$lte => date_new}).to_a
-coll.remove
+# coll.remove
 =begin
 (1..8).each do |i|
   s = "53728352c720b21fcc00000#{i}"

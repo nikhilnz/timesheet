@@ -2,14 +2,20 @@ require 'json'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'slim'
-require 'httparty'
-require 'calendar_helper'
+require_relative 'timesheet'
 
+require 'mongo'
+require_relative '../db/personal_holiday'
+require_relative '../db/timesheet_db'
 
-get '/name' do
-  {key: 'value'}.to_json
-  slim :'main'
+configure :development do
+  MongoMapper.setup({'development' => {'uri' => 'mongodb:/timesheet_test'}}, 'development')
 end
+
+configure :production do
+  MongoMapper.setup({'production' => {'uri' => 'mongodb:/timesheet'}}, 'production')
+end
+
 
 get '/timesheet/dates' do
   slim :'dates'
@@ -18,28 +24,24 @@ end
 get '/timesheet/generate' do
   @month = params['month']
   @year = params['year'].to_i
-  generate_timesheet(@month, @year)
-  slim :'timesheet'
+  timesheet = Timesheet.new().generate(@month, @year)
+  slim :'timesheet', locals: {timesheet: timesheet}
 end
-
 
 post '/timesheet/submit' do
-
+  puts '**'
+  puts params['days_worked'].to_i
+  puts params['month']
+  puts params['year']
+  puts '**'
+  timesheet_db = TimesheetDb.new(:days_worked => params['days_worked'].to_i, :month => params['month'], :year => params['year'])
+  timesheet_db.save!
+  # redirect "/timesheet/#{year}/#{month}"
 end
 
-def generate_timesheet(month, year)
-  date_wrapper = CalendarHelper::DateWrapper.new(month, year)
-
-  @from = "#{year}-#{month}-#{date_wrapper.first_day_of_month}"
-  @to = "#{year}-#{month}-#{date_wrapper.last_day_of_month}"
-
-  @pub_hols = HTTParty.get('http://localhost:4567/holidays/public', :query => {:from => @from, :to => @to}).to_i
-  @hols_taken = HTTParty.get('http://localhost:4567/holidays/personal').to_i
-
-  @total_days = date_wrapper.total_days
-  @weekends = date_wrapper.weekends
-
-  @working_days = @total_days - @weekends - @pub_hols - @hols_taken
+get '/timesheet/:year/:month' do
+  puts params['month']
+  puts params['year']
+  timesheet_db = TimesheetDb.where(:month => params['month']).where(:year =>params['year']).first
+  slim :saved_sheet, locals: {timesheet: timesheet_db}
 end
-
-
