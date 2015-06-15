@@ -1,12 +1,18 @@
-= "The month is #{@month.capitalize} and the year is #{@year}. "
-br
-= "Total number of days: #{timesheet.total_days}."
-/br
-/= "The number of public holidays are"
-/a href='http://localhost:4567/holidays/public/view?from=#{@from}&to=#{@to}' #{@pub_hols}.
-br
-= "The number of weekends are #{timesheet.weekends}."
-/br
-/= "Number of holidays taken: #{@hols_taken}"
-br
-= "Total number of working days: #{timesheet.working_days}"
+form name="input" action="/timesheet/submit" method="post"
+  = "The month is #{@month.capitalize} and the year is #{@year}. "
+  input name="month" type="hidden" value=@month.capitalize
+  input name="year" type="hidden" value=@year
+  input name="days_worked" type="hidden" value=timesheet.working_days
+  br
+  = "Total number of days: #{timesheet.total_days}."
+  /br
+  /= "The number of public holidays are"
+  /a href='http://localhost:4567/holidays/public/view?from=#{@from}&to=#{@to}' #{@pub_hols}.
+  br
+  = "The number of weekends are #{timesheet.weekends}."
+  /br
+  /= "Number of holidays taken: #{@hols_taken}"
+  br
+  = "Total number of working days: #{timesheet.working_days}"
+  button
+    | Submit Timesheet

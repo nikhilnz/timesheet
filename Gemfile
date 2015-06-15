@@ -11,6 +11,7 @@ gem 'mongo_mapper'
 gem 'bson_ext'
 gem 'calendar_helper', path: '../calendar_helper'
 gem 'bundler'
+gem 'rake'
 
 group :test do
   gem 'webmock'
