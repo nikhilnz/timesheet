@@ -11,7 +11,7 @@ begin
 
   RSpec::Core::RakeTask.new(:spec)
 
-  task :default => [:spec, :features]
+  task :default => [:spec]
 rescue LoadError
   # no rspec available
 end

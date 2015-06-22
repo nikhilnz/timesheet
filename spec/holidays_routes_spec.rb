@@ -2,6 +2,7 @@ Bundler.require :test
 
 require 'mongo'
 require_relative '../db/personal_holiday'
+require_relative '../db/holiday'
 require_relative '../lib/holidays_routes'
 
 describe 'Holidays Api' do
@@ -12,6 +13,14 @@ describe 'Holidays Api' do
   end
 
   context '/holidays/public' do
+    before do
+      Holiday.delete_all
+      require 'json'
+      h = JSON.parse File.read('db/holiday_format.json')
+      h['holidays'].each do |holiday|
+        Holiday.create holiday
+      end
+    end
     it 'retrieves the total number of holidays for a given month' do
       response = get('/holidays/public', month: 'May', year: 2014)
       expect(response.body).to eq(2.to_s)
