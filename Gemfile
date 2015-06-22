@@ -9,7 +9,7 @@ gem 'enrico'
 gem 'mongo'
 gem 'mongo_mapper'
 gem 'bson_ext'
-gem 'calendar_helper', path: '../calendar_helper'
+gem 'calendar_helper', git: 'git://github.com/nikhilnz/calendar_helper.git'
 gem 'bundler'
 gem 'rake'
 
