@@ -12,6 +12,8 @@ gem 'bson_ext'
 gem 'calendar_helper', git: 'git://github.com/nikhilnz/calendar_helper.git'
 gem 'bundler'
 gem 'rake'
+gem 'childprocess'
+gem 'waitforit', '~> 0.0.1'
 
 group :test do
   gem 'webmock'

@@ -22,6 +22,10 @@ get '/timesheet/dates' do
 end
 
 get '/timesheet/generate' do
+  puts '~~~~~~~'
+  puts params['month']
+  puts params['year']
+  puts '~~~~~~~'
   @month = params['month']
   @year = params['year'].to_i
   timesheet = Timesheet.new().generate(@month, @year)
