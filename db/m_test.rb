@@ -16,11 +16,19 @@ puts "*************************"
 #
 # puts coll.count
 
-
-db2 = mongo_client.db("pub_hols")
-coll = db2.collection("personal_holidays")
+require 'json'
+db2 = mongo_client.db("timesheet_test")
+coll = db2.collection("holidays")
 coll.find.each { |row| puts row.inspect }
-coll.remove
+# h = JSON.parse File.read('holiday_format.json')
+#
+# puts h['holidays'].count
+#
+# h['holidays'].each do |holiday|
+#   coll.insert holiday
+# end
+
+# coll.remove
 # puts 'dddd'
 # date_new = Time.parse("2014-12-24")
 # puts coll.find("date" => {$lte => date_new}).to_a
@@ -41,11 +49,5 @@ end
 
 require 'json'
 
-h = JSON.parse File.read('holiday_format.json')
 
-puts h['holidays'].count
-
-h['holidays'].each do |holiday|
-  coll.insert holiday
-end
 =end

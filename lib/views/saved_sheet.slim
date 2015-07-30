@@ -1,1 +1,4 @@
-= "Total number of working days: #{timesheet.days_worked}"
+- if timesheet
+  = "Total number of working days: #{timesheet.days_worked}"
+- else
+  'Timesheet not found'

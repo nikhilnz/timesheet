@@ -5,6 +5,8 @@ form name="input" action="/timesheet/submit" method="post"
   input name="days_worked" type="hidden" value=timesheet.working_days
   br
   = "Total number of days: #{timesheet.total_days}."
+  br
+  = "The number of bank holidays are #{timesheet.pub_hols}"
   /br
   /= "The number of public holidays are"
   /a href='http://localhost:4567/holidays/public/view?from=#{@from}&to=#{@to}' #{@pub_hols}.

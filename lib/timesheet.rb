@@ -8,13 +8,13 @@ class Timesheet
   def generate(month, year)
     date_wrapper = CalendarHelper::DateWrapper.new(month, year)
 
-    @from = "#{year}-#{month}-1"
-    @to = "#{year}-#{month}-#{date_wrapper.total_days}"
+    # @from = "#{year}-#{month}-1"
+    # @to = "#{year}-#{month}-#{date_wrapper.total_days}"
 
-    # @pub_hols = HTTParty.get('http://localhost:4567/holidays/public', :query => {:from => @from, :to => @to}).to_i
+    @pub_hols = HTTParty.get('http://localhost:4567/holidays/public', :query => {:month => month, :year => year}).to_i
     # @hols_taken = HTTParty.get('http://localhost:4567/holidays/personal').to_i
 
-    @pub_hols = 0
+    puts @pub_hols
     @hols_taken = 0
     @total_days = date_wrapper.total_days
     @weekends = date_wrapper.weekends

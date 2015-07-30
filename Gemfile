@@ -20,7 +20,7 @@ group :test do
   gem 'rspec'
   gem 'rack-test'
   gem 'gherkin'
-  gem 'cucumber'
+  gem 'cucumber' ,  '1.3.16 '
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'

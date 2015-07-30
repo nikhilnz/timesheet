@@ -47,6 +47,56 @@
             "date": "2014-12-26",
             "no_of_days": 1,
             "day": "Friday"
+        },
+        {
+            "title": "New Years Day",
+            "date": "2015-01-01",
+            "no_of_days": "1"
+        },
+        {
+            "title": "St Patricks Day",
+            "date": "2015-03-17",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Good Friday",
+            "date": "2015-04-03",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Easter Monday",
+            "date": "2015-04-06",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Early May bank holiday",
+            "date": "2015-05-04",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Spring bank holiday",
+            "date": "2015-05-25",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Battle of the Boyne (Orangemens Day)",
+            "date": "2015-07-13",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Summer bank holiday",
+            "date": "2015-08-31",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Christmas Day",
+            "date": "2015-12-25",
+            "no_of_days": "1"
+        },
+        {
+            "title": "Boxing Day",
+            "date": "2015-12-28",
+            "no_of_days": "1"
         }
     ]
 }

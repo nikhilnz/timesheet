@@ -8,8 +8,12 @@ require 'calendar_helper'
 require_relative '../db/holiday'
 require_relative '../db/personal_holiday'
 
-configure do
-  MongoMapper.setup({'production' => {'uri' => 'mongodb:/pub_hols'}}, 'production')
+configure :development do
+  MongoMapper.setup({'development' => {'uri' => 'mongodb:/timesheet_test'}}, 'development')
+end
+
+configure :production do
+  MongoMapper.setup({'production' => {'uri' => 'mongodb:/timesheet'}}, 'production')
 end
 
 get '/holidays/public/view' do
@@ -23,8 +27,8 @@ end
 
 def records
   date_wrapper = CalendarHelper::DateWrapper.new(params[:month], params[:year])
-  from = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-1")
-  to = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-#{date_wrapper.total_days}")
+  from = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-1").strftime("%Y-%m-%d")
+  to = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-#{date_wrapper.total_days}").strftime("%Y-%m-%d")
   Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
 end
 
