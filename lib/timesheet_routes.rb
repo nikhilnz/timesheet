@@ -40,7 +40,7 @@ post '/timesheet/submit' do
   puts '**'
   timesheet_db = TimesheetDb.new(:days_worked => params['days_worked'].to_i, :month => params['month'], :year => params['year'])
   timesheet_db.save!
-  # redirect "/timesheet/#{year}/#{month}"
+   redirect "/timesheet/#{params['year']}/#{params['month']}"
 end
 
 get '/timesheet/:year/:month' do

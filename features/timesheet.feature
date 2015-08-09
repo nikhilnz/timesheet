@@ -16,8 +16,12 @@ Feature: Generate timesheet
     And I choose the month 'June' and year '2015'
     And I click 'Generate Timesheet'
     When I click 'Submit Timesheet'
-    And I view the timesheet for the month 'June' and year '2015'
     And I should see 'Total number of working days: 22'
+
+  Scenario: View Timesheet
+    Given I have a timesheet submitted for the month 'June' and year '2015' with days worked '22'
+    When I view the timesheet for the month 'June' and year '2015'
+    Then I should see 'Total number of working days: 22'
 
   Scenario: Timesheet not found
     When I view the timesheet for the month 'June' and year '2015'

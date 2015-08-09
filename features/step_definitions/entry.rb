@@ -6,3 +6,8 @@ end
 When(/^I click '(.*)'$/) do |button|
   click_on(button)
 end
+
+Given(/^I have a timesheet submitted for the month '(.*)' and year '(.*)' with days worked '(.*)'$/) do |month, year, days_worked|
+  timesheet_db = TimesheetDb.new(:days_worked => days_worked.to_i, :month => month, :year => year)
+  timesheet_db.save!
+end

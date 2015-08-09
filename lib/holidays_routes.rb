@@ -29,7 +29,7 @@ def records
   date_wrapper = CalendarHelper::DateWrapper.new(params[:month], params[:year])
   from = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-1").strftime("%Y-%m-%d")
   to = Time.parse("#{params[:year]}-#{date_wrapper.month_number}-#{date_wrapper.total_days}").strftime("%Y-%m-%d")
-  Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
+   Holiday.where(:date => {:$gte => from}).where(:date => {:$lte => to})
 end
 
 get '/holidays/add' do

@@ -34,7 +34,7 @@ begin
     # ruby 'lib/holiday_routes.rb'
   end
 
-  task :default => [ :features]
+  task :default => [:spec, :features]
 rescue LoadError
   # no rspec available
 end
