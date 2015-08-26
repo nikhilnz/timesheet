@@ -12,10 +12,9 @@ class Timesheet
     # @to = "#{year}-#{month}-#{date_wrapper.total_days}"
 
     @pub_hols = HTTParty.get('http://localhost:4567/holidays/public', :query => {:month => month, :year => year}).to_i
-    # @hols_taken = HTTParty.get('http://localhost:4567/holidays/personal').to_i
+    @hols_taken = HTTParty.get('http://localhost:4567/holidays/personal').to_i
 
     puts @pub_hols
-    @hols_taken = 0
     @total_days = date_wrapper.total_days
     @weekends = date_wrapper.weekends
 

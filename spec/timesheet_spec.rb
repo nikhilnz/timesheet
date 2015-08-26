@@ -9,7 +9,7 @@ describe Timesheet do
 
     before do
       stub_request(:get, 'http://localhost:4567/holidays/public')
-      .with(:query => {from: "2014-January-1", to: "2014-January-31"})
+      .with(:query => {month: 'January', year: 2014})
       .to_return(body: "2")
 
       stub_request(:get, 'http://localhost:4567/holidays/personal')

@@ -2,6 +2,7 @@ require 'selenium-webdriver'
 require 'capybara/cucumber'
 require 'mongo'
 require_relative '../../db/timesheet_db'
+require_relative '../../db/holiday'
 
 MongoMapper.setup({'development' => {'uri' => 'mongodb:/timesheet_test'}}, 'development')
 
